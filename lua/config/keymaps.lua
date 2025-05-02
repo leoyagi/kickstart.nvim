@@ -1,7 +1,7 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
-vim.keymap.set('n', '-', vim.cmd.Ex)
+vim.keymap.set('n', '-', '<cmd>Oil<CR>')
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
 -- vim.keymap.set('n', '<space>x', ':.lua<CR>', { desc = 'Run lua code line' })
 -- vim.keymap.set('v', '<space>x', ':lua<CR>', { desc = 'Run lua code selection' })
@@ -12,6 +12,9 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+
+-- Terminal actions
+-- vim.keymap.set('n', '<leader>wr', ':te <cmd>cargo watch -c -w src -x run', { desc = 'Cargo [W]atch [R]un' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which

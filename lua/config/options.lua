@@ -5,6 +5,9 @@ vim.opt.termguicolors = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+vim.opt.softtabstop = 4
+vim.opt.tabstop = 4
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 

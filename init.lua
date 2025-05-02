@@ -89,13 +89,14 @@ require('lazy').setup {
   -- Then, because we use the `opts` key (recommended), the configuration runs
   -- after the plugin has been loaded as `require(MODULE).setup(opts)`.
 
-  { -- Useful plugin to show you pending keybinds.
+  { -- Useful plugin to show you pending keybinds//hints.
     'folke/which-key.nvim',
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.opt.timeoutlen
       delay = 0,
+      preset = 'helix',
       icons = {
         mappings = vim.g.have_nerd_font,
         keys = vim.g.have_nerd_font and {} or {
@@ -206,6 +207,7 @@ require('lazy').setup {
               --['<c-enter>'] = 'to_fuzzy_refine'
               ['<C-p>'] = 'move_selection_previous',
               ['<C-n>'] = 'move_selection_next',
+              ['<C-d>'] = 'delete_buffer',
             },
           },
         },
@@ -226,6 +228,7 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>fk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
       vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>fF', ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>fs', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>fw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
@@ -442,7 +445,42 @@ require('lazy').setup {
         clangd = {},
         -- gopls = {},
         pyright = {},
-        rust_analyzer = {},
+        kotlin_language_server = {},
+        markdown_oxide = {},
+        sqlls = {
+          filetypes = { 'sql' },
+        },
+        --
+        -- rust_analyzer = {
+        --   settings = {
+        --     ['rust-analyzer'] = {
+        --       cargo = {
+        --         -- allFeatures = true,
+        --         features = 'all',
+        --         -- loadOutDirsFromCheck = true,
+        --         -- runBuildScripts = true,
+        --         -- extraEnv = {
+        --         --   RUSTFLAGS = '--cfg rust_analyzer',
+        --         -- },
+        --       },
+        --       -- Add clippy lints for Rust.
+        --       -- checkOnSave = {
+        --       -- command = 'clippy',
+        --       -- command = 'check',
+        --       -- allFeatures = true,
+        --       -- extraArgs = { '--no-deps' },
+        --       -- extraArgs = { '--workspace' },
+        --       -- },
+        --       -- diagnostics = {
+        --       --   disabled = {
+        --       --     'inactive-code',
+        --       --   },
+        --       --   enable = false,
+        --       -- },
+        --     },
+        --   },
+        -- },
+        --
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
         --
         -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -503,7 +541,7 @@ require('lazy').setup {
       require('mason-lspconfig').setup {
         automatic_installation = false,
         ensure_installed = {
-          'rust_analyzer',
+          -- 'rust_analyzer',
           'taplo',
           'lua_ls',
         },
@@ -527,7 +565,7 @@ require('lazy').setup {
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>F',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
@@ -756,6 +794,7 @@ require('lazy').setup {
         'diff',
         'html',
         'lua',
+        'kotlin',
         'luadoc',
         'markdown',
         'markdown_inline',
