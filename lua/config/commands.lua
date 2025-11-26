@@ -34,3 +34,27 @@ end, {
     return vim.tbl_keys(presets)
   end,
 })
+
+local function set_features(features_str)
+  local features_value
+
+  if features_str == 'all' then
+    features_value = '"all"'
+  else
+    -- Split by comma and create array
+    local features = {}
+    for feature in features_str:gmatch '[^,]+' do
+      table.insert(features, string.format('"%s"', feature:match '^%s*(.-)%s*$')) -- trim whitespace
+    end
+    features_value = '{ ' .. table.concat(features, ', ') .. ' }'
+  end
+
+  local config_table = string.format('{ cargo = { features = %s } }', features_value)
+  vim.cmd.RustAnalyzer { 'config', config_table }
+  vim.cmd 'RustLsp reloadWorkspace'
+  -- vim.cmd 'RustAnalyzer restart'
+end
+
+vim.api.nvim_create_user_command('SetFeatures', function(opts)
+  set_features(opts.args)
+end, { nargs = 1 })

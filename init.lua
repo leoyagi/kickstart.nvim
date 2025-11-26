@@ -259,6 +259,9 @@ require('lazy').setup {
       vim.keymap.set('n', '<leader>fn', function()
         builtin.find_files { cwd = vim.fn.stdpath 'config' }
       end, { desc = '[S]earch [N]eovim files' })
+
+      local rf = require 'config.telescope.rust-features'
+      vim.keymap.set('n', '<leader>rf', rf.rust_features, { desc = 'Rust Features' })
     end,
   },
 
@@ -442,14 +445,14 @@ require('lazy').setup {
       --  - settings (table): Override the default settings passed when initializing the server.
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
-        clangd = {},
+        -- clangd = {},
         -- gopls = {},
-        pyright = {},
-        kotlin_language_server = {},
-        markdown_oxide = {},
-        sqlls = {
-          filetypes = { 'sql' },
-        },
+        -- pyright = {},
+        -- kotlin_language_server = {},
+        -- markdown_oxide = {},
+        -- sqlls = {
+        --   filetypes = { 'sql' },
+        -- },
         --
         -- rust_analyzer = {
         --   settings = {
@@ -517,6 +520,8 @@ require('lazy').setup {
             },
           },
         },
+
+        wgsl_analyzer = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -733,7 +738,8 @@ require('lazy').setup {
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
       vim.cmd.colorscheme 'kanagawa-wave'
-
+      -- Disable colorscheme background color
+      vim.cmd 'hi Normal guibg=NONE ctermbg=NONE'
       -- You can configure highlights by doing something like:
       -- vim.cmd.hi 'Comment gui=none'
     end,
@@ -812,9 +818,9 @@ require('lazy').setup {
         -- Some languages depend on vim's regex highlighting system (such as Ruby) for indent rules.
         --  If you are experiencing weird indenting issues, add the language to
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
-        additional_vim_regex_highlighting = { 'ruby', 'rust' },
+        additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby', 'rust' } },
+      indent = { enable = true, disable = { 'ruby' } },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:

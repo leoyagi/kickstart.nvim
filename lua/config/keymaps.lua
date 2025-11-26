@@ -1,6 +1,10 @@
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
+vim.keymap.set('n', '<leader>rf', function()
+  require('telescope._rust_features').pick_features()
+end, { desc = 'Select Rust features' })
+
 vim.keymap.set('n', '-', '<cmd>Oil<CR>')
 -- vim.keymap.set('n', '<space><space>x', '<cmd>source %<CR>')
 -- vim.keymap.set('n', '<space>x', ':.lua<CR>', { desc = 'Run lua code line' })

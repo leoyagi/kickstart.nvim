@@ -7,6 +7,7 @@ vim.opt.relativenumber = true
 
 vim.opt.softtabstop = 4
 vim.opt.tabstop = 4
+vim.opt.shiftwidth = 4 -- Indent width for auto-indents (<<, >>, ==)
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
@@ -22,11 +23,10 @@ vim.schedule(function()
   vim.opt.clipboard = 'unnamedplus'
 end)
 
--- Enable break indent
+-- Indent
 vim.opt.breakindent = true
-
--- Disable smartindent
 vim.opt.smartindent = true
+vim.opt.smarttab = true
 
 -- Save undo history
 vim.opt.undofile = true
@@ -51,8 +51,8 @@ vim.opt.splitbelow = true
 -- Sets how neovim will display certain whitespace characters in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
-vim.opt.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.list = true
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
@@ -61,4 +61,4 @@ vim.opt.inccommand = 'split'
 vim.opt.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.opt.scrolloff = 15
+vim.opt.scrolloff = 10
